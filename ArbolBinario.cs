@@ -20,7 +20,7 @@ namespace _1._4_ArbolesBinarios
 				raiz = nuevo;
 			}
 			else {
-				agregar(nuevo, raiz);
+				Agregar(nuevo, raiz);
 			}
 		}
 
@@ -33,7 +33,7 @@ namespace _1._4_ArbolesBinarios
 				}
 				else
 				{
-					agregar(nuevo, padre.izquierda);
+					Agregar(nuevo, padre.izquierda);
 				}
 			}
 			else
@@ -44,7 +44,7 @@ namespace _1._4_ArbolesBinarios
 				}
 				else
 				{
-					agregar(nuevo, padre.derecha);
+					Agregar(nuevo, padre.derecha);
 				}
 			}
 		}
