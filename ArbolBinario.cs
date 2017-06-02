@@ -14,54 +14,52 @@ namespace _1._4_ArbolesBinarios
             raiz = null;
         }
 
-        public void Insertar(int informacionNodo)
-        {
-            Nodo nuevo = new Nodo();
-            nuevo.informacionNodo = informacionNodo;
-            nuevo.izquierda = null;
-            nuevo.derecha = null;
-            if (raiz == null)
-            {
-                raiz = nuevo;
-            }
-            else
-            {
-                Nodo anterior = null, reco;
-                reco = raiz; 
-                while(reco != null)
-                {
-                    anterior = reco;
-                    if (informacionNodo < reco.informacionNodo)
-                    {
-                        reco = reco.izquierda;
-                    }
-                    else
-                    {
-                        reco = reco.derecha;
-                    }
-                }
-                if (informacionNodo < anterior.informacionNodo)
-                {
-                    anterior.izquierda = nuevo;
-                }
-                else
-                {
-                    anterior.derecha = nuevo;
-                }
-            }
-        }
+        public void Agregar(Nodo nuevo) {
+			if (raiz == null)
+			{
+				raiz = nuevo;
+			}
+			else {
+				agregar(nuevo, raiz);
+			}
+		}
 
-        public string InOrden(Nodo r)
+		private void Agregar(Nodo nuevo, Nodo padre) {
+			if (nuevo<padre.informacionNodo)
+			{
+				if (padre.izquierda == null)
+				{
+					padre.izquierda = nuevo;
+				}
+				else
+				{
+					agregar(nuevo, padre.izquierda);
+				}
+			}
+			else
+			{
+				if (padre.derecha==null)
+				{
+					padre.derecha = nuevo;
+				}
+				else
+				{
+					agregar(nuevo, padre.derecha);
+				}
+			}
+		}
+
+        public string InOrden(Nodo raiz)
         {
             string salida = "";
-            if(r.izquierda != null)
+            if(raiz.izquierda != null)
             {
-                salida += InOrden(r.izquierda);
+                salida += InOrden(raiz.izquierda);
             }
-            salida += r.ToString();
-            if(r.derecha != null)
+            salida += raiz.ToString();
+            if(raiz.derecha != null)
             {
-                salida += InOrden(r.derecha);
+                salida += InOrden(raiz.derecha);
             }
             return salida;
         }
