@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,89 +13,174 @@ namespace _1._4_ArbolesBinarios
         {
             raiz = null;
         }
-
-        public void Agregar(Nodo nuevo) {
-			if (raiz == null)
-			{
-				raiz = nuevo;
-			}
-			else {
-				Agregar(nuevo, raiz);
-			}
-		}
-
-		private void Agregar(Nodo nuevo, Nodo padre) {
-			if (nuevo<padre.informacionNodo)
-			{
-				if (padre.izquierda == null)
-				{
-					padre.izquierda = nuevo;
-				}
-				else
-				{
-					Agregar(nuevo, padre.izquierda);
-				}
-			}
-			else
-			{
-				if (padre.derecha==null)
-				{
-					padre.derecha = nuevo;
-				}
-				else
-				{
-					Agregar(nuevo, padre.derecha);
-				}
-			}
-		}
-
-        public string InOrden(Nodo raiz)
+        public void Agregar(Nodo nuevo)
         {
-            string salida = "";
-            if(raiz.izquierda != null)
+
+            if (raiz == null)
             {
-                salida += InOrden(raiz.izquierda);
+                raiz = nuevo; 
             }
-            salida += raiz.ToString();
-            if(raiz.derecha != null)
+            else
             {
-                salida += InOrden(raiz.derecha);
+                Agregar(nuevo, raiz);
             }
-            return salida;
         }
 
-        public string PreOrden(Nodo raiz)
+        private void Agregar(Nodo nuevo, Nodo padre)
         {
-            string salida = "";
-            salida += raiz.ToString();
-            if (raiz.izquierda != null)
+            if (nuevo.informacionNodo < padre.informacionNodo)
             {
-                salida += InOrden(raiz.izquierda);
+                if (padre.izquierda == null)
+                {
+                    padre.izquierda = nuevo;
+                }
+                else
+                {
+                    Agregar(nuevo, padre.izquierda);
+                }
             }
-            if (raiz.derecha != null)
+            else
             {
-                salida += InOrden(raiz.derecha);
+                if (padre.derecha == null)
+                {
+                    padre.derecha = nuevo;
+                }
+                else
+                {
+                    Agregar(nuevo, padre.derecha);
+                }
             }
-            return salida;
+        }
 
+        public Nodo Buscar(int informacion)
+        {
+            if (raiz == null)
+            {
+                return "" ;
+            }
+            else
+            {
+                return Buscar(informacion,raiz);
+            }
 
         }
 
-        public string PosOrden(Nodo raiz)
+        private Nodo Buscar(int informacion, Nodo x)
+        {
+     
+            if (informacion == x.informacionNodo)
+            {
+                return x;
+            }
+            else if (informacion < x.informacionNodo && x.izquierda!= null)
+            {
+                if (informacion == x.izquierda.informacionNodo )
+                {
+                   return  x.izquierda;
+                }
+                else
+                {
+                    return Buscar(informacion, x.izquierda);
+                }
+            }
+            else if(informacion> x.informacionNodo && x.derecha != null)
+            {
+                if (informacion == x.derecha.informacionNodo)
+                {
+                   return x.derecha;
+                }
+                else
+                {
+                    return Buscar(informacion, x.derecha);
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public string IndOrden()
+        {
+            if (raiz == null)
+            {
+                return "";
+            }
+            else
+            {
+                return InOrden(raiz);
+            }
+  
+        }
+        private string InOrden(Nodo r)
+        {
+            string salida = "";
+            if(r.izquierda != null)
+            {
+                salida += InOrden(r.izquierda);
+            }
+            salida += r.ToString();
+            if(r.derecha != null)
+            {
+                salida += InOrden(r.derecha);
+            }
+            return salida;
+        }
+        public string PreOrden()
+        {
+            if (raiz == null)
+            {
+                return "";
+            }
+            else
+            {
+                return PreOrden(raiz);
+            }
+        }
+
+        private string PreOrden(Nodo r)
+        {
+            string salida = "";
+            salida += r.ToString();
+            if (r.izquierda != null)
+            {
+                salida += PreOrden(r.izquierda);
+            }
+            if (r.derecha != null)
+            {
+                salida += PreOrden(r.derecha);
+            }
+            return salida;
+
+
+        }
+
+        public string PosOrden()
+        {
+            if (raiz == null)
+            {
+                return "";
+            }
+            else
+            {
+                return PosOrden(raiz);
+            }
+        }
+        private string PosOrden(Nodo r)
         {
             string salida = "";
             //I
-            if (raiz.izquierda != null)
+            if (r.izquierda != null)
             {
-                salida += InOrden(raiz.izquierda);
+                salida +=PosOrden(r.izquierda);
             }
             //D
-            if (raiz.derecha != null)
+            if (r.derecha != null)
             {
-                salida += InOrden(raiz.derecha);
+                salida += PosOrden(r.derecha);
             }
             //R
-            salida += raiz.ToString();
+            salida += r.ToString();
             return salida;
 
         }
