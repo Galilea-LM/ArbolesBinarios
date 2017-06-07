@@ -56,7 +56,7 @@ namespace _1._4_ArbolesBinarios
         {
             if (raiz == null)
             {
-                return "" ;
+                return null ;
             }
             else
             {
@@ -72,32 +72,29 @@ namespace _1._4_ArbolesBinarios
             {
                 return x;
             }
-            else if (informacion < x.informacionNodo && x.izquierda!= null)
+            else if (informacion < x.informacionNodo)
             {
-                if (informacion == x.izquierda.informacionNodo )
-                {
-                   return  x.izquierda;
-                }
-                else
+                if (x.izquierda != null)
                 {
                     return Buscar(informacion, x.izquierda);
                 }
-            }
-            else if(informacion> x.informacionNodo && x.derecha != null)
-            {
-                if (informacion == x.derecha.informacionNodo)
-                {
-                   return x.derecha;
-                }
                 else
+                {
+                    return null;
+                } 
+            }
+            else if(informacion > x.informacionNodo )
+            {
+                if ( x.derecha != null)
                 {
                     return Buscar(informacion, x.derecha);
                 }
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return "";
-            }
+            
         }
 
         public string IndOrden()
